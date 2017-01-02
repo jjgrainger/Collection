@@ -2,6 +2,8 @@
 
 > A collection class for working with arrays
 
+[![Build Status](https://travis-ci.org/jjgrainger/Collection.svg?branch=master)](https://travis-ci.org/jjgrainger/Collection)
+
 ## Principles
 
 * Immutable - Most methods return a new collection, leaving the previous untouched
