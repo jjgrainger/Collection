@@ -2,7 +2,7 @@
 
 > A collection class for working with arrays
 
-[![Build Status](https://travis-ci.org/jjgrainger/Collection.svg?branch=master)](https://travis-ci.org/jjgrainger/Collection)
+[![Build Status](https://travis-ci.org/jjgrainger/Collection.svg?branch=master)](https://travis-ci.org/jjgrainger/Collection) [![Total Downloads](https://poser.pugx.org/jjgrainger/collection/downloads)](https://packagist.org/packages/jjgrainger/collection) [![Latest Stable Version](https://poser.pugx.org/jjgrainger/collection/v/stable)](https://packagist.org/packages/jjgrainger/collection) [![License](https://poser.pugx.org/jjgrainger/collection/license)](https://packagist.org/packages/jjgrainger/collection)
 
 ## Principles
 

@@ -1,12 +1,20 @@
 {
     "name": "jjgrainger/collection",
+    "version": "1.0",
     "description": "Simple collections in PHP",
+    "homepage": "https://github.com/jjgrainger/collection",
+    "license": "MIT",
     "authors": [
         {
-            "name": "jjgrainger",
-            "email": "hi@jjgrainger.co.uk"
+            "name": "Joe Grainger",
+            "email": "hello@jjgrainger.co.uk",
+            "homepage": "http://jjgrainger.co.uk"
         }
     ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0"
+    },
     "autoload": {
         "psr-4": {
             "Collection\\": "src"
