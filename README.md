@@ -11,7 +11,7 @@
 
 ## Requirements
 
-* PHP v5.3
+* PHP >=7.2
 * Composer
 
 ## Installation
