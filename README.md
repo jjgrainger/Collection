@@ -1,4 +1,4 @@
-# Collection v1.0
+# Collection v1.1
 
 > A collection class for working with arrays
 
