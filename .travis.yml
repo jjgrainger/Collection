@@ -1,4 +1,6 @@
 language: php
+notifications:
+  email: false
 php:
     - 7.2
     - 7.3
