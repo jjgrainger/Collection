@@ -304,6 +304,15 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
+     * Check if the collection is not empty
+     * @return boolean
+     */
+    public function isNotEmpty()
+    {
+        return !empty($this->items);
+    }
+
+    /**
      * Return the collection as an array
      * @return Array
      */
