@@ -179,6 +179,18 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
+     * Returns a collection with duplicate values
+     * @return Collection
+     */
+    public function duplicates()
+    {
+        $unique = array_unique($this->items);
+        $duplicates = array_diff_assoc($this->items, $unique);
+
+        return new static($duplicates);
+    }
+
+    /**
      * Return a new collection with the items reverese
      * @return Collection
      */

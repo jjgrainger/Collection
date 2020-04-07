@@ -195,6 +195,13 @@ class CollectionTest extends TestCase
         $this->assertEquals([1, 2, 3], $unique->values()->all());
     }
 
+    public function test_duplicate_values_in_collection()
+    {
+        $this->assertEquals(['Bram'], (new Collection(['Bram', 'Bram', 'John', 'Doe']))->duplicates()->values()->all());
+        $this->assertEquals([1, 45], (new Collection([1, 1, 2, 5, 11, 28, 45, 45, 60]))->duplicates()->values()->all());
+        $this->assertEquals([], (new Collection(['Bram', 'John', 'Doe', 'Jane']))->duplicates()->values()->all());
+    }
+
     public function test_reverse_items_in_collection()
     {
         $collection = new Collection([1, 2, 3]);
