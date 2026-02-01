@@ -4,8 +4,14 @@
          verbose="true"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Test suite">
+        <testsuite name="Collection Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
 </phpunit>
