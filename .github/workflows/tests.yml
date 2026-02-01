@@ -59,4 +59,9 @@ jobs:
         run: composer install --prefer-dist --no-progress
 
       - name: PHPUnit
-        run: composer phpunit
+        run: composer phpunit:coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
