@@ -20,7 +20,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Create a collection with items passed.
-     * 
+     *
      * @param array $items
      */
     public function __construct(array $items = [])
@@ -41,7 +41,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return items in the collection.
-     * 
+     *
      * @return array
      */
     public function all(): array
@@ -51,7 +51,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Get an item by key.
-     * 
+     *
      * @param string|int $key
      * @param mixed $default
      * @return mixed
@@ -67,7 +67,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Check if key exists in the collection.
-     * 
+     *
      * @param string|int $key
      * @return boolean
      */
@@ -89,7 +89,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Add item to the end of the collection.
-     * 
+     *
      * @param mixed $value
      */
     public function push(mixed $value): void
@@ -99,7 +99,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Remove and return an item via its key.
-     * 
+     *
      * @param string|int $key
      * @param mixed $default
      * @return mixed
@@ -115,7 +115,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return the first item in the collection.
-     * 
+     *
      * @return mixed
      */
     public function first(): mixed
@@ -125,7 +125,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return the last item in the collection.
-     * 
+     *
      * @return mixed
      */
     public function last(): mixed
@@ -135,7 +135,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return and remove the last item in the array.
-     * 
+     *
      * @return mixed
      */
     public function pop(): mixed
@@ -145,7 +145,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return and remove the first item in the array.
-     * 
+     *
      * @return mixed
      */
     public function shift(): mixed
@@ -155,7 +155,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Remove item from the collection via its key.
-     * 
+     *
      * @param string|int $key
      */
     public function remove(string|int $key): void
@@ -165,7 +165,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return the collection keys as a new collection.
-     * 
+     *
      * @return static
      */
     public function keys(): static
@@ -175,7 +175,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Reset the collections keys.
-     * 
+     *
      * @return static
      */
     public function values(): static
@@ -187,7 +187,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Transform the current collection.
-     * 
+     *
      * @param callable $iterator
      */
     public function transform(callable $iterator): static
@@ -199,7 +199,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Returns a collection without duplicate values.
-     * 
+     *
      * @return static
      */
     public function unique(): static
@@ -209,7 +209,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return a new collection with the items reverse.
-     * 
+     *
      * @return static
      */
     public function reverse(): static
@@ -219,7 +219,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return a new collection with the items shuffled.
-     * 
+     *
      * @return static
      */
     public function shuffle(): static
@@ -233,7 +233,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Get one or more items randomly from the collection.
-     * 
+     *
      * @param int $amount
      * @return mixed
      */
@@ -254,7 +254,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Flip items in the collection.
-     * 
+     *
      * @return static
      */
     public function flip(): static
@@ -264,7 +264,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Map over each of the items in the collection.
-     * 
+     *
      * @param callable $iterator
      * @return static
      */
@@ -275,7 +275,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Filter items within the collection.
-     * 
+     *
      * @param callable $filter
      * @return static
      */
@@ -286,7 +286,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Reduce the collection to a single value.
-     * 
+     *
      * @param callable $callback
      * @param mixed $initial
      * @return mixed
@@ -298,7 +298,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Sum the items in the collection.
-     * 
+     *
      * @param string|int|null $key
      */
     public function sum(string|int|null $key = null): int
@@ -314,7 +314,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Concatenate items into a string.
-     * 
+     *
      * @param string $glue
      * @return string
      */
@@ -325,7 +325,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return total items in collection.
-     * 
+     *
      * @return int
      */
     public function count(): int
@@ -335,7 +335,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Check if the collection is empty.
-     * 
+     *
      * @return boolean
      */
     public function isEmpty(): bool
@@ -345,7 +345,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Check if the collection is not empty.
-     * 
+     *
      * @return boolean
      */
     public function isNotEmpty(): bool
@@ -355,7 +355,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return the collection as an array.
-     * 
+     *
      * @return array
      */
     public function toArray(): array
@@ -365,7 +365,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Return the collection as JSON.
-     * 
+     *
      * @param int $flags
      * @param int $depth
      * @return string|false
@@ -377,7 +377,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * Iterate over items in collection.
-     * 
+     *
      * @return Traversable
      */
     public function getIterator(): Traversable
@@ -387,7 +387,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
 
     /**
      * JSON Serialize items in the collection.
-     * 
+     *
      * @return mixed
      */
     public function jsonSerialize(): mixed
