@@ -25,6 +25,7 @@
     },
     "scripts": {
         "phpcs": "./vendor/bin/phpcs --standard=psr2 src",
+        "phpcbf": "./vendor/bin/phpcbf --standard=psr2 src",
         "phpunit": "./vendor/bin/phpunit",
         "phpunit:coverage": "./vendor/bin/phpunit --configuration phpunit.xml --coverage-clover=coverage.xml",
         "phpstan": "phpstan analyse src"
