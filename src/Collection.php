@@ -7,6 +7,7 @@ use Countable;
 use ArrayIterator;
 use JsonSerializable;
 use IteratorAggregate;
+use Traversable;
 
 class Collection implements Countable, IteratorAggregate, JsonSerializable
 {
@@ -269,11 +270,9 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
             return array_sum($this->items);
         }
 
-        if (is_string($key)) {
-            return $this->map(function ($item) use ($key) {
-                return $item[$key];
-            })->sum();
-        }
+        return $this->map(function ($item) use ($key) {
+            return $item[$key];
+        })->sum();
     }
 
     /**
@@ -289,7 +288,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      * Return total items in collection
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->items);
     }
@@ -334,7 +333,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     /**
      * Iterate over items in collection
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->items);
     }
@@ -342,7 +341,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     /**
      * JSON Serialize items in the collection
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->items;
     }
