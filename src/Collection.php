@@ -11,34 +11,52 @@ use Traversable;
 
 class Collection implements Countable, IteratorAggregate, JsonSerializable
 {
-
-    protected $items;
+    /**
+     * Collection items.
+     *
+     * @var array
+     */
+    protected array $items;
 
     /**
-     * Create a collection from passed items
+     * Create a collection with items passed.
+     *
      * @param array $items
      */
-    public function __construct($items = [])
+    public function __construct(array $items = [])
     {
         $this->items = $items;
     }
 
     /**
-     * Return udnerlying array in collection
+     * Create a collection statically.
+     *
+     * @param array $items
+     * @return static
+     */
+    public static function collect(array $items): static
+    {
+        return new static($items);
+    }
+
+    /**
+     * Return items in the collection.
+     *
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->items;
     }
 
     /**
-     * Get an item in the collection by its key
-     * @param  mixed $key
-     * @param  mixed $default
+     * Get an item by key.
+     *
+     * @param string|int $key
+     * @param mixed $default
      * @return mixed
      */
-    public function get($key, $default = null)
+    public function get(string|int $key, mixed $default = null): mixed
     {
         if ($this->has($key)) {
             return $this->items[$key];
@@ -48,45 +66,45 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
-     * Check if key exists in the collection
-     * @param  mixed  $key
+     * Check if key exists in the collection.
+     *
+     * @param string|int $key
      * @return boolean
      */
-    public function has($key)
+    public function has(string|int $key): bool
     {
-        if (isset($this->items[$key])) {
-            return true;
-        }
-
-        return false;
+        return isset($this->items[$key]);
     }
 
     /**
-     * Set a key and value to the collection
-     * @param  mixed $key
-     * @param  mixed $value
+     * Put value to collection with key.
+     *
+     * @param string|int $key
+     * @param mixed $value
      */
-    public function put($key, $value)
+    public function put(string|int $key, mixed $value): void
     {
         $this->items[$key] = $value;
     }
 
     /**
-     * Add item to the end of the collection
-     * @param  mixed $value
+     * Add item to the end of the collection.
+     *
+     * @param mixed $value
      */
-    public function push($value)
+    public function push(mixed $value): void
     {
         $this->items[] = $value;
     }
 
     /**
-     * Remove and return an item via its key
-     * @param  mixed $key
-     * @param  mixed $default
+     * Remove and return an item via its key.
+     *
+     * @param string|int $key
+     * @param mixed $default
      * @return mixed
      */
-    public function pull($key, $default = null)
+    public function pull(string|int $key, mixed $default = null): mixed
     {
         $value = $this->get($key, $default);
 
@@ -96,63 +114,71 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
-     * Return the first item in the collection
+     * Return the first item in the collection.
+     *
      * @return mixed
      */
-    public function first()
+    public function first(): mixed
     {
         return count($this->items) ? reset($this->items) : null;
     }
 
     /**
-     * Return the last item in the collection
+     * Return the last item in the collection.
+     *
      * @return mixed
      */
-    public function last()
+    public function last(): mixed
     {
         return count($this->items) ? end($this->items) : null;
     }
 
     /**
-     * Return and remove the last item in the array
+     * Return and remove the last item in the array.
+     *
      * @return mixed
      */
-    public function pop()
+    public function pop(): mixed
     {
         return array_pop($this->items);
     }
 
     /**
-     * Return and remove the first item in the array
+     * Return and remove the first item in the array.
+     *
      * @return mixed
      */
-    public function shift()
+    public function shift(): mixed
     {
         return array_shift($this->items);
     }
 
     /**
-     * Remove item from the collection via its key
-     * @param  mixed $key
+     * Remove item from the collection via its key.
+     *
+     * @param string|int $key
      */
-    public function remove($key)
+    public function remove(string|int $key): void
     {
         unset($this->items[$key]);
     }
 
     /**
-     * Return the collection keys as a new collection
-     * @return Collection
+     * Return the collection keys as a new collection.
+     *
+     * @return static
      */
-    public function keys()
+    public function keys(): static
     {
         return new static(array_keys($this->items));
     }
 
     /**
-     * Reset the collections keys
+     * Reset the collections keys.
+     *
+     * @return static
      */
-    public function values()
+    public function values(): static
     {
         $this->items = array_values($this->items);
 
@@ -160,10 +186,11 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
-     * Transform the current collection
-     * @param  Closure $iterator
+     * Transform the current collection.
+     *
+     * @param callable $iterator
      */
-    public function transform(Closure $iterator)
+    public function transform(callable $iterator): static
     {
         $this->items = array_map($iterator, $this->items);
 
@@ -171,28 +198,31 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
-     * Returns a collection without duplicate values
-     * @return Collection
+     * Returns a collection without duplicate values.
+     *
+     * @return static
      */
-    public function unique()
+    public function unique(): static
     {
         return new static(array_unique($this->items, SORT_REGULAR));
     }
 
     /**
-     * Return a new collection with the items reverese
-     * @return Collection
+     * Return a new collection with the items reverse.
+     *
+     * @return static
      */
-    public function reverse()
+    public function reverse(): static
     {
         return new static(array_reverse($this->items));
     }
 
     /**
-     * Return a new collection with the items shuffled
-     * @return Collection
+     * Return a new collection with the items shuffled.
+     *
+     * @return static
      */
-    public function shuffle()
+    public function shuffle(): static
     {
         $items = $this->items;
 
@@ -202,10 +232,12 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
-     * Get one or more items randomly from the collection
-     * @param  integer $amount
+     * Get one or more items randomly from the collection.
+     *
+     * @param int $amount
+     * @return mixed
      */
-    public function random($amount = 1)
+    public function random(int $amount = 1): mixed
     {
         if ($this->isEmpty()) {
             return null;
@@ -221,50 +253,55 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
-     * Flip items in the collection
-     * @return Collection
+     * Flip items in the collection.
+     *
+     * @return static
      */
-    public function flip()
+    public function flip(): static
     {
         return new static(array_flip($this->items));
     }
 
     /**
-     * Map over each of the items in the collection
-     * @param  Closure $iterator
-     * @return Collection
+     * Map over each of the items in the collection.
+     *
+     * @param callable $iterator
+     * @return static
      */
-    public function map(Closure $iterator)
+    public function map(callable $iterator): static
     {
         return new static(array_map($iterator, $this->items));
     }
 
     /**
-     * Filter items within the collection
-     * @param  Closure $filter
-     * @return Collection
+     * Filter items within the collection.
+     *
+     * @param callable $filter
+     * @return static
      */
-    public function filter(Closure $filter)
+    public function filter(?callable $filter): static
     {
         return new static(array_filter($this->items, $filter));
     }
 
     /**
-     * Reduce the collection to a single value
-     * @param  Closure $callback
-     * @param  mixed   $initial
-     * @return Collection
+     * Reduce the collection to a single value.
+     *
+     * @param callable $callback
+     * @param mixed $initial
+     * @return mixed
      */
-    public function reduce(Closure $callback, $initial = null)
+    public function reduce(callable $callback, $initial = null): mixed
     {
         return array_reduce($this->items, $callback, $initial);
     }
 
     /**
-     * Sum the items in the collection
-     * @param  string $key
+     * Sum the items in the collection.
+     *
+     * @param string|int|null $key
      */
-    public function sum($key = null)
+    public function sum(string|int|null $key = null): int
     {
         if (is_null($key)) {
             return array_sum($this->items);
@@ -276,16 +313,19 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
-     * Concatenate items into a string
-     * @param  string $glue
+     * Concatenate items into a string.
+     *
+     * @param string $glue
+     * @return string
      */
-    public function implode($glue = '')
+    public function implode(string $glue = ''): string
     {
         return implode($glue, $this->items);
     }
 
     /**
-     * Return total items in collection
+     * Return total items in collection.
+     *
      * @return int
      */
     public function count(): int
@@ -294,44 +334,51 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
-     * Check if the collection is empty
+     * Check if the collection is empty.
+     *
      * @return boolean
      */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return empty($this->items);
     }
 
     /**
-     * Check if the collection is not empty
+     * Check if the collection is not empty.
+     *
      * @return boolean
      */
-    public function isNotEmpty()
+    public function isNotEmpty(): bool
     {
-        return !empty($this->items);
+        return ! $this->isEmpty();
     }
 
     /**
-     * Return the collection as an array
-     * @return Array
+     * Return the collection as an array.
+     *
+     * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->items;
     }
 
     /**
-     * Return the collection as JSON
-     * @param  integer $options
-     * @return string
+     * Return the collection as JSON.
+     *
+     * @param int $flags
+     * @param int $depth
+     * @return string|false
      */
-    public function toJson($options = 0)
+    public function toJson(int $flags = 0, int $depth = 512): string|false
     {
-        return json_encode($this->items, $options);
+        return json_encode($this->items, $flags, $depth);
     }
 
     /**
-     * Iterate over items in collection
+     * Iterate over items in collection.
+     *
+     * @return Traversable
      */
     public function getIterator(): Traversable
     {
@@ -339,7 +386,9 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
     }
 
     /**
-     * JSON Serialize items in the collection
+     * JSON Serialize items in the collection.
+     *
+     * @return mixed
      */
     public function jsonSerialize(): mixed
     {

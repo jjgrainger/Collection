@@ -2,7 +2,7 @@
 
 > A collection class for working with arrays
 
-[![tests](https://github.com/jjgrainger/Collection/actions/workflows/tests.yml/badge.svg)](https://github.com/jjgrainger/Collection/actions/workflows/tests.yml) [![Latest Stable Version](https://badgen.net/github/release/jjgrainger/Collection/stable)](https://packagist.org/packages/jjgrainger/collection) [![Total Downloads](https://badgen.net/packagist/dt/jjgrainger/Collection)](https://packagist.org/packages/jjgrainger/collection) [![License](https://badgen.net/github/license/jjgrainger/Collection)](https://packagist.org/packages/jjgrainger/collection)
+[![tests](https://github.com/jjgrainger/Collection/actions/workflows/tests.yml/badge.svg)](https://github.com/jjgrainger/Collection/actions/workflows/tests.yml) [![codecov](https://codecov.io/gh/jjgrainger/Collection/graph/badge.svg?token=XMLzVOcLHB)](https://codecov.io/gh/jjgrainger/Collection) [![Latest Stable Version](https://badgen.net/github/release/jjgrainger/Collection/stable)](https://packagist.org/packages/jjgrainger/collection) [![Total Downloads](https://badgen.net/packagist/dt/jjgrainger/Collection)](https://packagist.org/packages/jjgrainger/collection) [![License](https://badgen.net/github/license/jjgrainger/Collection)](https://packagist.org/packages/jjgrainger/collection)
 
 ## Principles
 
