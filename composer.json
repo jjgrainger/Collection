@@ -26,7 +26,7 @@
     "scripts": {
         "phpcs": "./vendor/bin/phpcs --standard=psr2 src",
         "phpunit": "./vendor/bin/phpunit",
-        "phpunit:coverage": "./vendor/bin/phpunit --coverage-clover=coverage.xml",
+        "phpunit:coverage": "./vendor/bin/phpunit --configuration phpunit.xml --coverage-clover=coverage.xml",
         "phpstan": "phpstan analyse src"
     }
 }
