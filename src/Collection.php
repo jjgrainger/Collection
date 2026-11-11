@@ -115,7 +115,9 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function first(): mixed
     {
-        return count($this->items) ? reset($this->items) : null;
+        $key = array_key_first($this->items);
+
+        return $key === null ? null : $this->items[$key];
     }
 
     /**
@@ -125,7 +127,9 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function last(): mixed
     {
-        return count($this->items) ? end($this->items) : null;
+        $key = array_key_last($this->items);
+
+        return $key === null ? null : $this->items[$key];
     }
 
     /**
@@ -294,7 +298,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      *
      * @param string|int|null $key
      * @return int|float
-     */
+    */
     public function sum(string|int|null $key = null): int|float
     {
         if (is_null($key)) {
