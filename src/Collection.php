@@ -2,9 +2,9 @@
 
 namespace Collection;
 
-use Closure;
 use Countable;
 use ArrayIterator;
+use InvalidArgumentException;
 use JsonSerializable;
 use IteratorAggregate;
 use Traversable;
@@ -58,11 +58,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function get(string|int $key, mixed $default = null): mixed
     {
-        if ($this->has($key)) {
-            return $this->items[$key];
-        }
-
-        return $default;
+        return $this->has($key) ? $this->items[$key] : $default;
     }
 
     /**
@@ -73,7 +69,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function has(string|int $key): bool
     {
-        return isset($this->items[$key]);
+        return array_key_exists($key, $this->items);
     }
 
     /**
@@ -120,7 +116,9 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function first(): mixed
     {
-        return count($this->items) ? reset($this->items) : null;
+        $key = array_key_first($this->items);
+
+        return $key === null ? null : $this->items[$key];
     }
 
     /**
@@ -130,7 +128,9 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function last(): mixed
     {
-        return count($this->items) ? end($this->items) : null;
+        $key = array_key_last($this->items);
+
+        return $key === null ? null : $this->items[$key];
     }
 
     /**
@@ -180,9 +180,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function values(): static
     {
-        $this->items = array_values($this->items);
-
-        return $this;
+        return new static(array_values($this->items));
     }
 
     /**
@@ -235,12 +233,16 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      * Get one or more items randomly from the collection.
      *
      * @param int $amount
-     * @return mixed
+     * @return mixed|static
+     *
+     * @throws InvalidArgumentException
      */
     public function random(int $amount = 1): mixed
     {
-        if ($this->isEmpty()) {
-            return null;
+        if ($amount < 1 || $amount > $this->count()) {
+            throw new InvalidArgumentException(
+                'The requested amount must be between 1 and the collection count.'
+            );
         }
 
         $keys = array_rand($this->items, $amount);
@@ -300,8 +302,9 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      * Sum the items in the collection.
      *
      * @param string|int|null $key
-     */
-    public function sum(string|int|null $key = null): int
+     * @return int|float
+    */
+    public function sum(string|int|null $key = null): int|float
     {
         if (is_null($key)) {
             return array_sum($this->items);

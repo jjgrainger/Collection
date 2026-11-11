@@ -166,13 +166,13 @@ class CollectionTest extends TestCase
         $this->assertEquals(['a', 'b'], $keys->all());
     }
 
-    public function test_values_resets_array_keys()
+    public function test_values_returns_collection_of_values()
     {
-        $collection = new Collection([1 => 'one', 2 => 'two']);
+        $collection = new Collection(['first' => 'one', 'second' => 'two']);
 
-        $collection->values();
+        $values = $collection->values();
 
-        $this->assertEquals('one', $collection->get(0));
+        $this->assertEquals(['one', 'two'], $values->all());
     }
 
     public function tets_transform_modifies_collection()
@@ -204,11 +204,41 @@ class CollectionTest extends TestCase
         $this->assertEquals([3, 2, 1], $reversed->all());
     }
 
-    public function test_random_returns_null_when_empty()
+    public function test_random_returns_one_random_item()
     {
+        $collection = new Collection([1, 2, 3]);
+
+        $item = $collection->random();
+
+        $this->assertIsNotArray($item);
+        $this->assertContains($item, $collection->all());
+    }
+
+    public function test_random_returns_correct_amount_of_items()
+    {
+        $collection = new Collection([1, 2, 3]);
+
+        $items = $collection->random(2);
+
+        $this->assertCount(2, $items);
+    }
+
+    public function test_random_throws_exception_when_empty()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
         $collection = new Collection;
 
-        $this->assertEquals(null, $collection->random());
+        $collection->random();
+    }
+
+    public function test_random_throws_exception_when_amount_is_greater_than_collection()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $collection = new Collection([1]);
+
+        $collection->random(2);
     }
 
     public function test_flip_collection()
@@ -262,6 +292,13 @@ class CollectionTest extends TestCase
         $collection = new Collection([1, 2, 3]);
 
         $this->assertEquals(6, $collection->sum());
+    }
+
+    public function test_sum_returns_floats()
+    {
+        $collection = new Collection([1.23, 1.27]);
+
+        $this->assertEquals(2.5, $collection->sum());
     }
 
     public function test_implode_returns_correct_string()
