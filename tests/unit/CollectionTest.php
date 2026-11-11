@@ -166,13 +166,13 @@ class CollectionTest extends TestCase
         $this->assertEquals(['a', 'b'], $keys->all());
     }
 
-    public function test_values_resets_array_keys()
+    public function test_values_returns_collection_of_values()
     {
-        $collection = new Collection([1 => 'one', 2 => 'two']);
+        $collection = new Collection(['first' => 'one', 'second' => 'two']);
 
-        $collection->values();
+        $values = $collection->values();
 
-        $this->assertEquals('one', $collection->get(0));
+        $this->assertEquals(['one', 'two'], $values->all());
     }
 
     public function tets_transform_modifies_collection()

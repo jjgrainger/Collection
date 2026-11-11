@@ -2,7 +2,6 @@
 
 namespace Collection;
 
-use Closure;
 use Countable;
 use ArrayIterator;
 use JsonSerializable;
@@ -180,9 +179,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function values(): static
     {
-        $this->items = array_values($this->items);
-
-        return $this;
+        return new static(array_values($this->items));
     }
 
     /**
