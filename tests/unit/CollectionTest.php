@@ -264,6 +264,13 @@ class CollectionTest extends TestCase
         $this->assertEquals(6, $collection->sum());
     }
 
+    public function test_sum_returns_floats()
+    {
+        $collection = new Collection([1.23, 1.27]);
+
+        $this->assertEquals(2.5, $collection->sum());
+    }
+
     public function test_implode_returns_correct_string()
     {
         $collection = new Collection([1, 2, 3]);

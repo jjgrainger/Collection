@@ -293,8 +293,9 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      * Sum the items in the collection.
      *
      * @param string|int|null $key
+     * @return int|float
      */
-    public function sum(string|int|null $key = null): int
+    public function sum(string|int|null $key = null): int|float
     {
         if (is_null($key)) {
             return array_sum($this->items);
