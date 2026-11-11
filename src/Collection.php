@@ -57,11 +57,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function get(string|int $key, mixed $default = null): mixed
     {
-        if ($this->has($key)) {
-            return $this->items[$key];
-        }
-
-        return $default;
+        return $this->has($key) ? $this->items[$key] : $default;
     }
 
     /**
@@ -72,7 +68,7 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      */
     public function has(string|int $key): bool
     {
-        return isset($this->items[$key]);
+        return array_key_exists($key, $this->items);
     }
 
     /**
