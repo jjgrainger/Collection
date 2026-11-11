@@ -4,6 +4,7 @@ namespace Collection;
 
 use Countable;
 use ArrayIterator;
+use InvalidArgumentException;
 use JsonSerializable;
 use IteratorAggregate;
 use Traversable;
@@ -232,12 +233,16 @@ class Collection implements Countable, IteratorAggregate, JsonSerializable
      * Get one or more items randomly from the collection.
      *
      * @param int $amount
-     * @return mixed
+     * @return mixed|static
+     *
+     * @throws InvalidArgumentException
      */
     public function random(int $amount = 1): mixed
     {
-        if ($this->isEmpty()) {
-            return null;
+        if ($amount < 1 || $amount > $this->count()) {
+            throw new InvalidArgumentException(
+                'The requested amount must be between 1 and the collection count.'
+            );
         }
 
         $keys = array_rand($this->items, $amount);
